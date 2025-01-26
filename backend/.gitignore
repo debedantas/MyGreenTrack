@@ -1,0 +1,43 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# Byte-compiled and optimized files
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# SQLite database files
+*.sqlite3
+*.db
+
+# Virtual environment directories
+venv/
+.env/
+env/
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+*.egg-info/
+dist/
+build/
