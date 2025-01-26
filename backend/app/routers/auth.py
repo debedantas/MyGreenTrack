@@ -21,7 +21,6 @@ async def login(user_login: UserLogin):
 
 @router.post("/register", response_model=UserInDB, status_code=status.HTTP_201_CREATED)
 async def create_user(user_create: UserRegister) -> UserInDB:
-    print(user_create)
     user = user_crud.get_user(user_create.email)
     if user is not None:
         raise HTTPException(
