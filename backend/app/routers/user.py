@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, status
-from typing import List
-from app.schemas.user import User, Users
+from fastapi import APIRouter, HTTPException, status, Depends
+from app.schemas.user import Users, UserInDB
 from app.crud.user import user_crud
+from app.routers.dependencies import get_current_user
 router = APIRouter()
 
 
@@ -11,25 +11,17 @@ async def get_users() -> Users:
     return {"users": users}
 
 
-@router.get("/{user_email}")
-async def get_user(user_email: str) -> User:
+@router.get("/email/{user_email}")
+async def get_user(user_email: str) -> UserInDB:
     user = user_crud.get_user(user_email)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"User with {user_email} not found"
         )
-
     return user
 
 
-@router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
-async def create_user(user_create: User) -> User:
-    user = user_crud.get_user(user_create.email)
-    if user is not None:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=f"The user with this {user_create.email} already exists in the system",
-        )
-    user_crud.create_user(user_create)
-    return user_create
+@router.get("/me", response_model=UserInDB)
+async def read_users_me(current_user: UserInDB = Depends(get_current_user)):
+    return current_user
