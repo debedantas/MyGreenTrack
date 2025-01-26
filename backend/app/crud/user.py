@@ -1,6 +1,6 @@
 from typing import List, Optional
-from app.schemas.user import User
-from app.db.fake_db import FakeDataBase
+from schemas.user import User
+from db.fake_db import FakeDataBase
 
 
 class UserRepository:
