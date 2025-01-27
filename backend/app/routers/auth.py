@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.auth import Token, UserLogin, UserRegister
-from app.schemas.user import UserInDB
-from app.crud.user import user_crud
-from app.security import create_access_token, get_password_hash
+from schemas.auth import Token, UserLogin, UserRegister
+from schemas.user import UserInDB
+from crud.user import user_crud
+from security import create_access_token, get_password_hash
 router = APIRouter()
 
 

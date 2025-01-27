@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from datetime import datetime, timezone, timedelta
-from app.schemas.auth import Token
+from schemas.auth import Token
 import jwt
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

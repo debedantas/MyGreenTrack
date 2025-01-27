@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer
-from app.security import decode_jwt
-from app.crud.user import user_crud
+from security import decode_jwt
+from crud.user import user_crud
 
 oauth2_scheme = HTTPBearer()
 

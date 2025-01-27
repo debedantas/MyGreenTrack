@@ -1,7 +1,8 @@
 from typing import List, Optional
-from app.schemas.user import UserInDB
-from app.db.fake_db import FakeDataBase
-from app.security import verify_password
+from schemas.user import UserInDB
+from db.fake_db import FakeDataBase
+from security import verify_password
+
 
 
 class UserRepository:
