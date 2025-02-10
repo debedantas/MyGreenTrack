@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from schemas.user import UserType
 
 
 class Token(BaseModel):
@@ -13,3 +14,7 @@ class UserLogin(BaseModel):
 
 class UserRegister(UserLogin):
     full_name: str
+
+
+class UserRegisterAdmin(UserRegister):
+    type: UserType
