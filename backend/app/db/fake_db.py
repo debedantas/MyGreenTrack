@@ -26,3 +26,7 @@ class FakeDataBase(Generic[T]):
             if getattr(item, field, None) == value:
                 return item
         return None
+
+    def update_item(self, item_id: Any, id_field: str, item: T):
+        self.delete_item(item_id, id_field)
+        self.add_item(item)
