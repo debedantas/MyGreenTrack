@@ -4,13 +4,15 @@ from db.fake_db import FakeDataBase
 from security import verify_password
 
 
-
 class UserRepository:
     def __init__(self):
         self.user_db = FakeDataBase(UserInDB)
-        user = UserInDB(email="user@example.com", full_name="string",
+        user = UserInDB(email="user@example.com", full_name="string", type="user",
                         hashed_password="$2b$12$76sdl6It7zWmRSVIUofC0eDE0ujtr6G/VC4U6uCkp1V8ldzEbJIL2")
+        admin = UserInDB(email="admin@example.com", full_name="string", type="admin",
+                         hashed_password="$2b$12$76sdl6It7zWmRSVIUofC0eDE0ujtr6G/VC4U6uCkp1V8ldzEbJIL2")
         self.user_db.add_item(user)
+        self.user_db.add_item(admin)
 
     def get_all_users(self) -> List[UserInDB]:
         return self.user_db.get_all_items()
