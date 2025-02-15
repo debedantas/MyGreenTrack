@@ -2,3 +2,5 @@ fastapi
 uvicorn
 pydantic
 pydantic[email]
+pyjwt
+passlib[bcrypt]
