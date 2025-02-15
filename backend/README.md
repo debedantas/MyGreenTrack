@@ -21,7 +21,8 @@ $ pip install -r requirements.txt
 
 #### Run project
 ```bash
-$ uvicorn app.main:app --reload
+$ cd app
+$ uvicorn main:app --reload
 ```
 
 #### Testing the API:
