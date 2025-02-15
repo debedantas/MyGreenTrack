@@ -2,3 +2,4 @@ fastapi
 uvicorn
 pydantic
 pydantic[email]
+pip install mysql-connector-python
