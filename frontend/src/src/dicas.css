@@ -1,0 +1,100 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #6a9e58;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-list li {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .active {
+    color: #6a9e58;
+  }
+  
+  .logout {
+    color: red;
+  }
+  
+  .recent-section {
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-meta {
+    font-size: 0.9rem;
+    color: gray;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .tag-container {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .tag {
+    background: #6a9e58;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
