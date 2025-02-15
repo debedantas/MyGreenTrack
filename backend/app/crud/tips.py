@@ -10,8 +10,8 @@ class TipRepository:
     def get_all_tips(self) -> List[Tip]:
         return self.tip_db.get_all_items()
 
-    def get_tip(self, tip_number: int) -> Optional[Tip]:
-        tip = self.tip_db.get_item(tip_number, "number")
+    def get_tip(self, tip_id: int) -> Optional[Tip]:
+        tip = self.tip_db.get_item(tip_id, "id")
         if not tip:
             return None
         return tip
@@ -19,8 +19,8 @@ class TipRepository:
     def create_tip(self, tip: Tip) -> None:
         self.tip_db.add_item(tip)
 
-    def delete_tip(self, tip_number: int) -> None:
-        self.tip_db.delete_item(tip_number, "number")
+    def delete_tip(self, tip_id: int) -> None:
+        self.tip_db.delete_item(tip_id, "id")
 
 
 tip_crud = TipRepository()

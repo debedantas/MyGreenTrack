@@ -3,9 +3,13 @@ from typing import List
 
 
 class Tip(BaseModel):
-    number: int
-    name: str
-    content: str
+    id: int
+    title: str
+    author_name: str
+    category: str
+    creation_date: str
+    summary: str
+    content_id: int
 
 
 class Tips(BaseModel):
