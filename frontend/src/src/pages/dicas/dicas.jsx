@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./MyGreenTrack.css";
+import "./dicas.css";
+import imagePlaceHolder from "./image 1.png"
 
 export default function MyGreenTrack() {
   const [page, setPage] = useState(1);
@@ -7,7 +8,7 @@ export default function MyGreenTrack() {
   const dicasRecentes = [
     {
       id: 1,
-      image: "dicas1.jpg",
+      image: imagePlaceHolder,
       author: "Olivia Rhye",
       date: "1 Jan 2023",
       title: "Como a alimentação consciente pode ajudar o planeta",
@@ -15,7 +16,7 @@ export default function MyGreenTrack() {
     },
     {
       id: 2,
-      image: "dicas2.jpg",
+      image: imagePlaceHolder,
       author: "Phoenix Baker",
       date: "1 Jan 2023",
       title: "Dicas de reflorestamento",
@@ -23,7 +24,7 @@ export default function MyGreenTrack() {
     },
     {
       id: 3,
-      image: "dicas3.jpg",
+      image: imagePlaceHolder,
       author: "Lana Steiner",
       date: "1 Jan 2023",
       title: "Sustentabilidade começa com energia",
