@@ -6,6 +6,10 @@ from routers import (
     checklist,
     user_checklist
 )
+from db.database import engine, Base
+
+# Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
