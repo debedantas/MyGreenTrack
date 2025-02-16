@@ -3,6 +3,7 @@ from routers import (
     auth,
     user,
     tips,
+    content,
     checklist,
     user_checklist
 )
@@ -11,11 +12,13 @@ from db.database import engine, Base
 # Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
+
 app = FastAPI()
 
 app.include_router(user.router, prefix="/user")
 app.include_router(auth.router, prefix="/auth")
 app.include_router(tips.router, prefix="/tip")
+app.include_router(content.router, prefix="/content")
 app.include_router(checklist.router, prefix="/checklist")
 app.include_router(user_checklist.router, prefix="/user_checklist")
 
@@ -25,3 +28,5 @@ app.include_router(user_checklist.router, prefix="/user_checklist")
 @app.get("/")
 def health():
     return {"message": "Hello world"}
+
+
