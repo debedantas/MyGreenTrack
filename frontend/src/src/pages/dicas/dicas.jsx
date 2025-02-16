@@ -5,6 +5,8 @@ import imagePlaceHolder from "./image 1.png";
 export default function MyGreenTrack() {
   const [page, setPage] = useState(1);
 
+  const pages = [1, 2, 3, 4, 5, 6, 7, 8];
+
   const todasDicas = [
     {
       id: 1,
@@ -49,6 +51,33 @@ export default function MyGreenTrack() {
     // Adicione outros itens aqui conforme necessário
   ];
 
+  const renderPageNumbers = () => {
+    const totalPages = pages.length;
+    const firstPages = pages.slice(0, 3);
+    const lastPages = pages.slice(totalPages - 3, totalPages);
+
+    const middlePages = page > 3 && page < totalPages - 2 ? [page] : [];
+
+    const pageNumbers = [...firstPages, ...middlePages, ...lastPages];
+
+    return pageNumbers.reduce((acc, num, index) => {
+      if (index > 0 && num - pageNumbers[index - 1] > 1) {
+        acc.push(<button style={{ cursor: "unset" }} key={`ellipsis-${index}`}>...</button>);
+      }
+      acc.push(
+        <button
+          key={num}
+          className={page === num ? "active" : ""}
+          onClick={() => setPage(num)}
+        >
+          {num}
+        </button>
+      );
+      return acc;
+    }, []);
+  };
+
+
   return (
     <div className="container">
       <header className="header">
@@ -62,7 +91,7 @@ export default function MyGreenTrack() {
           </ul>
         </nav>
       </header>
-      
+
       <section className="tips-section">
         <h2 className="section-title">Dicas recentes</h2>
         <div className="grid-container">
@@ -102,13 +131,11 @@ export default function MyGreenTrack() {
           ))}
         </div>
         <div className="pagination">
-          <button onClick={() => setPage(p => Math.max(1, p - 1))}>&lt;</button>
-          {[1, 2, 3, 8, 9, 10].map(num => (
-            <button key={num} className={page === num ? 'active' : ''}>
-              {num}
-            </button>
-          ))}
-          <button onClick={() => setPage(p => p + 1)}>Próximo</button>
+          <button onClick={() => setPage(p => pages.includes(p - 1) ? p - 1 : p)}>&lt; Anterior</button>
+          <div className="buttons">
+            {renderPageNumbers()}
+          </div>
+          <button onClick={() => setPage(p => pages.includes(p + 1) ? p + 1 : p)}>Próximo &gt;</button>
         </div>
       </section>
 
