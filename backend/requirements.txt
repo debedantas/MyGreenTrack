@@ -4,3 +4,4 @@ pydantic
 pydantic[email]
 pyjwt
 passlib[bcrypt]
+mysql-connector-python
