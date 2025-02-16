@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from schemas.checklist import Checklist, Checklists
 from crud.checklist import checklist_crud
+from routers.dependencies import get_current_active_super_user
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ async def get_checklist(checklist_id: int) -> Checklist:
 
 
 @router.post("/", response_model=Checklist, status_code=status.HTTP_201_CREATED)
-async def create_checklist(checklist_create: Checklist) -> Checklist:
+async def create_checklist(checklist_create: Checklist, super_user=Depends(get_current_active_super_user)) -> Checklist:
     checklist = checklist_crud.get_checklist(checklist_create.id)
     if checklist is not None:
         raise HTTPException(

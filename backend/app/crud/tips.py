@@ -1,11 +1,11 @@
 from typing import List, Optional
 from schemas.tips import Tip
-from db.fake_db import FakeDataBase
+from db.mySQL_db import MySQLDatabase
 
 
 class TipRepository:
     def __init__(self):
-        self.tip_db = FakeDataBase(Tip)
+        self.tip_db = MySQLDatabase(Tip)
 
     def get_all_tips(self) -> List[Tip]:
         return self.tip_db.get_all_items()
