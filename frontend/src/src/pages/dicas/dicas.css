@@ -1,100 +1,90 @@
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-  }
-  
-  .title {
-    font-size: 2rem;
-    color: #6a9e58;
-  }
-  
-  .nav-list {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  .nav-list li {
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .active {
-    color: #6a9e58;
-  }
-  
-  .logout {
-    color: red;
-  }
-  
-  .recent-section {
-    margin-top: 20px;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    padding: 15px;
-  }
-  
-  .card-meta {
-    font-size: 0.9rem;
-    color: gray;
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-    margin: 10px 0;
-  }
-  
-  .tag-container {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .tag {
-    background: #6a9e58;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-  }
-  
-  .footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px;
-    border-top: 1px solid #ddd;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-list {
+  display: flex;
+  gap: 30px;
+  justify-self: end;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.tag {
+  background: transparent;
+  border: 1px solid #6a9e58;
+  color: #6a9e58;
+  padding: 4px 12px;
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #6a9e58;
+  color: white;
+  border-color: #6a9e58;
+}
+
+/* Novos estilos para tipografia */
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin: 40px 0 20px;
+  font-weight: 600;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
