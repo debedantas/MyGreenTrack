@@ -32,7 +32,7 @@ class UserChecklistRepository:
 
         return checklist_responses
 
-    def update_user_checklist_response(self, user_email: str, option_id: int, checked: bool) -> Optional[UserChecklistResponse]:
+    def update_user_checklist_response(self, user_email: str, id: int, checked: bool) -> Optional[UserChecklistResponse]:
         response = self.user_checklist_db.get_item(id, "id")
         user_cheklist = self.get_all_user_checklists(user_email)
         if not response or not any(response.id == id for response in user_cheklist):

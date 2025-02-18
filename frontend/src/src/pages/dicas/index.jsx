@@ -1,8 +1,24 @@
 import { useState } from "react";
-import "./dicas.css";
+import styles from "./styles.module.css";
 import imagePlaceHolder from "./image 1.png";
+import { useAuth } from "../../context/authProvider";
+import axios from "axios";
+import { Toaster } from "react-hot-toast";
 
-export default function MyGreenTrack() {
+export function Dicas() {
+  const { user, logout } = useAuth();
+  const [name, setName] = useState('');
+
+  (async () => {
+    const res = await axios.get('http://localhost:8000/user/me', {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    })
+
+    setName(res.data.full_name)
+  })();
+
   const [page, setPage] = useState(1);
 
   const pages = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -67,7 +83,7 @@ export default function MyGreenTrack() {
       acc.push(
         <button
           key={num}
-          className={page === num ? "active" : ""}
+          className={page === num ? styles.active : ""}
           onClick={() => setPage(num)}
         >
           {num}
@@ -79,31 +95,34 @@ export default function MyGreenTrack() {
 
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1 className="title">MyGreenTrack</h1>
+    <div className={styles.container}>
+      <Toaster />
+      <header className={styles.header}>
+        <h1 className={styles.greetings}>Olá, {name}</h1>
         <nav>
-          <ul className="nav-list">
-            <li className="active">Dicas</li>
+          <ul className={styles.nav_list}>
+            <li className={styles.active}>Dicas</li>
             <li>Hábitos</li>
             <li>Pegada</li>
-            <li className="logout">Sair</li>
+            <li className={styles.logout}><button className={styles.logout} onClick={logout}>Sair</button></li>
           </ul>
         </nav>
       </header>
 
-      <section className="tips-section">
-        <h2 className="section-title">Dicas recentes</h2>
-        <div className="grid-container">
+      <h1 className={styles.title}>MyGreenTrack</h1>
+
+      <section className={styles.tips_section}>
+        <h2 className={styles.section_title}>Dicas recentes</h2>
+        <div className={styles.grid_container}>
           {todasDicas.slice(0, 3).map((dica) => (
-            <div key={dica.id} className="card">
-              <img src={dica.image} alt={dica.title} className="card-image" />
-              <div className="card-content">
-                <p className="card-meta">{dica.author} • {dica.date}</p>
-                <h3 className="card-title">{dica.title}</h3>
-                <div className="tag-container">
+            <div key={dica.id} className={styles.card}>
+              <img src={dica.image} alt={dica.title} className={styles.card_image} />
+              <div className={styles.card_content}>
+                <p className={styles.card_meta}>{dica.author} • {dica.date}</p>
+                <h3 className={styles.card_title}>{dica.title}</h3>
+                <div className={styles.tag_container}>
                   {dica.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
+                    <span key={index} className={styles.tag}>{tag}</span>
                   ))}
                 </div>
               </div>
@@ -112,34 +131,34 @@ export default function MyGreenTrack() {
         </div>
       </section>
 
-      <section className="tips-section">
-        <h2 className="section-title">Todas as dicas</h2>
-        <div className="grid-container">
+      <section className={styles.tips_section}>
+        <h2 className={styles.section_title}>Todas as dicas</h2>
+        <div className={styles.grid_container}>
           {todasDicas.map((dica) => (
-            <div key={dica.id} className="card">
-              <img src={dica.image} alt={dica.title} className="card-image" />
-              <div className="card-content">
-                <p className="card-meta">{dica.author} • {dica.date}</p>
-                <h3 className="card-title">{dica.title}</h3>
-                <div className="tag-container">
+            <div key={dica.id} className={styles.card}>
+              <img src={dica.image} alt={dica.title} className={styles.card_image} />
+              <div className={styles.card_content}>
+                <p className={styles.card_meta}>{dica.author} • {dica.date}</p>
+                <h3 className={styles.card_title}>{dica.title}</h3>
+                <div className={styles.tag_container}>
                   {dica.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
+                    <span key={index} className={styles.tag}>{tag}</span>
                   ))}
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="pagination">
+        <div className={styles.pagination}>
           <button onClick={() => setPage(p => pages.includes(p - 1) ? p - 1 : p)}>&lt; Anterior</button>
-          <div className="buttons">
+          <div className={styles.buttons}>
             {renderPageNumbers()}
           </div>
           <button onClick={() => setPage(p => pages.includes(p + 1) ? p + 1 : p)}>Próximo &gt;</button>
         </div>
       </section>
 
-      <footer className="footer">
+      <footer className={styles.footer}>
         MyGreenTrack © 2025
       </footer>
     </div>

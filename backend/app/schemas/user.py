@@ -11,5 +11,12 @@ class UserInDB(User):
     hashed_password: str
 
 
+class UserResponse(UserInDB):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+
 class Users(BaseModel):
     users: List[UserInDB]

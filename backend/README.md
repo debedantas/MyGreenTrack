@@ -19,6 +19,15 @@ $ .\venv\Scripts\Activate.ps1
 $ pip install -r requirements.txt
 ```
 
+#### Change the database credentials to your local credentials
+File: app/db/database.py
+```python
+DATABASE_USER = "user"
+DATABASE_PASSWORD = "password"
+DATABASE_HOST = "localhost"
+DATABASE_NAME = "database"
+```
+
 #### Run project
 ```bash
 $ cd app

@@ -1,7 +1,7 @@
-import { LoginForm } from "../../components/LoginForm"
+import { RegisterForm } from "../../components/RegisterForm"
 import styles from "./styles.module.css"
 
-export function Login() {
+export function Register() {
     return (
         <div className={styles.body}>
             <div className={styles.container}>
@@ -10,7 +10,7 @@ export function Login() {
                     <h3>MyGreenTrack</h3>
                 </div>
                 <div className={styles.login_container}>
-                    <LoginForm />
+                    <RegisterForm />
                 </div>
             </div>
         </div>
