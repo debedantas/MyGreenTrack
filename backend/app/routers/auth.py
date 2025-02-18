@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from schemas.auth import Token, UserLogin, UserRegister
 from schemas.user import UserInDB, UserResponse
-from crud.user_new import user_repository
+from crud.user import user_repository
 from security import create_access_token, get_password_hash
 from sqlalchemy.orm import Session
 from db.database import get_db

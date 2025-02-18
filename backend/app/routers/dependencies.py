@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer
 from security import decode_jwt
-from crud.user_new import user_repository
+from crud.user import user_repository
 from db.database import get_db
 from sqlalchemy.orm import Session
 from model.user import User

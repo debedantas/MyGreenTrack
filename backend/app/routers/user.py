@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from schemas.user import Users, UserInDB, UserResponse
 from model.user import User
-from crud.user_new import user_repository
+from crud.user import user_repository
 from routers.dependencies import get_current_user
 from db.database import get_db
 from sqlalchemy.orm import Session

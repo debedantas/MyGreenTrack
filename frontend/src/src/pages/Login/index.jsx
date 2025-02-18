@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { LoginForm } from "../../components/LoginForm"
 import { RegisterForm } from "../../components/RegisterForm"
-import "./styles.css"
+import styles from "./styles.module.css"
 
 export function Login() {
     const [showLogin, setShowLogin] = useState(true)
@@ -11,13 +11,13 @@ export function Login() {
     }
 
     return (
-        <div className="body">
-            <div className="container">
-                <div className="side-container">
-                    <p>A melhor maneira de acompanhar a sua <span className="bold">pegada</span> de carbono</p>
+        <div className={styles.body}>
+            <div className={styles.container}>
+                <div className={styles.side_container}>
+                    <p>A melhor maneira de acompanhar a sua <span className={styles.bold}>pegada</span> de carbono</p>
                     <h3>MyGreenTrack</h3>
                 </div>
-                <div className="login-container">
+                <div className={styles.login_container}>
                     {showLogin ? <LoginForm toggle={toggleLogin} /> : <RegisterForm toggle={toggleLogin} />}
                 </div>
             </div>
