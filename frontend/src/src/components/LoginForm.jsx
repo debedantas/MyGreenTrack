@@ -29,6 +29,7 @@ export function LoginForm({ toggle }) {
             const token = response.data.access_token;
 
             login({ email, token });
+            notify(toast.success, "Login efetuado com sucesso");
             navigate('/');
         } catch (error) {
             notify(toast.error, "Email ou senha incorretos");
@@ -42,7 +43,7 @@ export function LoginForm({ toggle }) {
             <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <input type="password" value={password} placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Login</button>
-            <span>Não tem conta? <a className={styles.bold} onClick={() => toggle()}>Cadastre-se aqui</a></span>
+            <span>Não tem conta? <a className={styles.bold} onClick={() => navigate("/register")}>Cadastre-se aqui</a></span>
         </form>
     )
 }

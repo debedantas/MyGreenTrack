@@ -2,12 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import styles from '../pages/Login/styles.module.css';
+import { useNavigate } from "react-router-dom";
 const notify = (notifyType, message) => notifyType(message);
 
-export function RegisterForm({ toggle }) {
+export function RegisterForm() {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +26,7 @@ export function RegisterForm({ toggle }) {
             });
             // const token = response.data.token;
             notify(toast.success, "Conta criada com sucesso");
-            toggle();
+            navigate('/login');
         } catch ({ status, response }) {
             if (status === 422) notify(toast.error, "Preencha todos os campos de forma correta");
             if (status === 409) notify(toast.error, "Email já cadastrado");
@@ -39,7 +41,7 @@ export function RegisterForm({ toggle }) {
             <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <input type="password" value={password} placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Criar conta</button>
-            <span>Já tem uma conta? <a className={styles.bold} onClick={() => toggle()}>Faça Login</a></span>
+            <span>Já tem uma conta? <a className={styles.bold} onClick={() => navigate("/login")}>Faça Login</a></span>
         </form>
     )
 }

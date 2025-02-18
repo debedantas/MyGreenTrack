@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import imagePlaceHolder from "./image 1.png";
 import { useAuth } from "../../context/authProvider";
 import axios from "axios";
+import { Toaster } from "react-hot-toast";
 
 export function Dicas() {
   const { user, logout } = useAuth();
@@ -95,6 +96,7 @@ export function Dicas() {
 
   return (
     <div className={styles.container}>
+      <Toaster />
       <header className={styles.header}>
         <h1 className={styles.greetings}>Olá, {name}</h1>
         <nav>

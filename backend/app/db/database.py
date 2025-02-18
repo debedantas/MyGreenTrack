@@ -5,10 +5,10 @@ from sqlalchemy.orm import sessionmaker
 
 
 # Configuração do banco de dados
-DATABASE_USER = "user"
-DATABASE_PASSWORD = "password"
+DATABASE_USER = "root"
+DATABASE_PASSWORD = "dda11012001"
 DATABASE_HOST = "localhost"
-DATABASE_NAME = "database"
+DATABASE_NAME = "testeteste3"
 
 # Criando a URL de conexão
 DATABASE_URL = f"mysql+pymysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}"
