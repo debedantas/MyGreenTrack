@@ -36,3 +36,10 @@ $ uvicorn main:app --reload
 
 #### Testing the API:
 * Swagger UI: http://127.0.0.1:8000/docs
+
+
+#### Running tests:
+```bash
+$ cd app
+$ python -m pytest tests
+```
