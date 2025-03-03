@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
 # Configuração do banco de dados
