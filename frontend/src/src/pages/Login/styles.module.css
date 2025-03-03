@@ -1,6 +1,6 @@
 .body {
     box-sizing: border-box;
-    padding: 105px;
+    padding: 3rem;
     height: 100vh;
 }
 
@@ -17,20 +17,20 @@ h3 {
     background-color: #ADC178;
 }
 
-.side-container>p {
+.side_container>p {
     font-size: 2rem;
     text-align: center;
     max-width: 13ch;
     color: #fff
 }
 
-.side-container>h3 {
+.side_container>h3 {
     font-size: 3.5rem;
     color: #606C38;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.side-container {
+.side_container {
     box-sizing: border-box;
     flex: 1;
     display: flex;
@@ -41,7 +41,7 @@ h3 {
     gap: 2rem;
 }
 
-.login-container {
+.login_container {
     flex: 2;
     display: flex;
     justify-content: center;
@@ -51,7 +51,7 @@ h3 {
     border-radius: 2rem 0 0 2rem;
 }
 
-.form-container {
+.form_container {
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -59,15 +59,15 @@ h3 {
     gap: 1.25rem;
 }
 
-.form-container h3 {
+.form_container h3 {
     margin-bottom: 3rem;
 }
 
-.form-container span {
+.form_container span {
     text-align: center;
 }
 
-.form-container button {
+.form_container button {
     background-color: #606C38;
     color: #ffffff;
     font-family: inherit;
@@ -77,11 +77,11 @@ h3 {
     border-radius: 0.35rem;
 }
 
-.form-container button:hover {
+.form_container button:hover {
     cursor: pointer;
 }
 
-.form-container a {
+.form_container a {
     color: #606C38;
     text-decoration: none;
     cursor: pointer;
@@ -93,7 +93,7 @@ h3 {
     font-family: inherit;
 }
 
-.form-container input {
+.form_container input {
     border: none;
     background-color: transparent;
     color: #000000;
@@ -101,7 +101,7 @@ h3 {
     transition: border-bottom 0.2s;
 }
 
-.form-container input:focus {
+.form_container input:focus {
     outline: none;
     border-bottom: 2px solid #606C38;
 }
