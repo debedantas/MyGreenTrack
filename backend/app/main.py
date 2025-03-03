@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routers import (
     auth,
     user,
@@ -7,9 +8,23 @@ from routers import (
     checklist,
     user_checklist
 )
+from db.database import engine, Base
+
+# Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(user.router, prefix="/user")
 app.include_router(auth.router, prefix="/auth")
