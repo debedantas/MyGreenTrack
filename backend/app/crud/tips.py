@@ -1,4 +1,23 @@
-from typing import List, Optional
+from typing import List
+from sqlalchemy.orm import Session
+from model.tips import M_Tip
+from crud.base_crud import CRUDRepository
+
+
+class TipRepository(CRUDRepository):
+    def find_all(self, db: Session) -> M_Tip:
+        return db.query(M_Tip).all()
+
+    def find_by_id(self, db: Session, id: int) -> List[M_Tip]:
+        return db.query(M_Tip).filter(M_Tip.id == id).first()
+
+
+
+tip_repository = TipRepository(model=M_Tip)
+
+
+#old code
+"""from typing import List, Optional
 from schemas.tips import Tip
 from db.fake_db import FakeDataBase
 
@@ -23,4 +42,4 @@ class TipRepository:
         self.tip_db.delete_item(tip_id, "id")
 
 
-tip_crud = TipRepository()
+tip_crud = TipRepository()"""

@@ -4,7 +4,6 @@ from crud.content import content_crud
 from fastapi.responses import HTMLResponse
 router = APIRouter()
 
-
 @router.get("/", response_model=Contents)
 async def get_contents() -> Contents:
     contents = content_crud.get_all_content()
