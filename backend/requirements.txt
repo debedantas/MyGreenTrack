@@ -7,3 +7,6 @@ passlib[bcrypt]
 sqlalchemy
 sqlalchemy_utils
 pymysql
+pytest
+pytest-mock
+cryptography
