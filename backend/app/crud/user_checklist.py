@@ -1,68 +1,126 @@
 from typing import List, Optional
-from schemas.user_checklist import UserChecklistResponse
-from db.fake_db import FakeDataBase
+from sqlalchemy.orm import Session, joinedload
+from schemas.user_checklist import UserChecklistResponse, ChecklistOptionResponse
+from crud.base_crud import CRUDRepository
 from crud.checklist import checklist_crud
+from model.user_checklist import UserChecklist
+from model.checklist import Checklist, ChecklistOption
 
 
-class UserChecklistRepository:
-    def __init__(self):
-        self.user_checklist_db = FakeDataBase(UserChecklistResponse)
+class UserChecklistRepository(CRUDRepository):
+    def get_user_checklist(
+        self,
+        db: Session,
+        user_email: str,
+        checklist_id: int
+    ) -> Optional[UserChecklistResponse]:
+        # Get the checklist with its options
+        checklist = db.query(Checklist).options(
+            joinedload(Checklist.options)
+        ).filter(
+            Checklist.id == checklist_id
+        ).first()
 
-    def get_all_user_checklists(self, user_email: str) -> List[UserChecklistResponse]:
-        all_checklists = checklist_crud.get_all_checklists()
-        all_responses = self.user_checklist_db.get_all_items()
-        user_responses = [
-            response for response in all_responses if response.user_email == user_email]
-
-        for checklist in all_checklists:
-            if not any(response.checklist_id == checklist.id for response in user_responses):
-                user_responses.extend(
-                    self.create_default_responses(user_email, checklist.id))
-
-        return user_responses
-
-    def get_checklist(self, user_email: str, checklist_id: int) -> Optional[UserChecklistResponse]:
-        all_responses = self.get_all_user_checklists(user_email)
-        checklist_responses = [
-            response for response in all_responses if response.checklist_id == checklist_id]
-
-        if not checklist_responses:
-            checklist_responses = self.create_default_responses(
-                user_email, checklist_id)
-
-        return checklist_responses
-
-    def update_user_checklist_response(self, user_email: str, id: int, checked: bool) -> Optional[UserChecklistResponse]:
-        response = self.user_checklist_db.get_item(id, "id")
-        user_cheklist = self.get_all_user_checklists(user_email)
-        if not response or not any(response.id == id for response in user_cheklist):
+        if not checklist:
             return None
 
-        response.checked = checked
-        self.user_checklist_db.update_item(id, "id", response)
-        return response
+        # Get user responses for this checklist
+        user_responses = db.query(UserChecklist).filter(
+            UserChecklist.user_email == user_email,
+            UserChecklist.checklist_id == checklist_id
+        ).all()
 
-    def create_user_checklist_response(self, user_email: str, checklist_id: int, option_id: int, checked: bool) -> None:
-        response = UserChecklistResponse(
-            id=self.user_checklist_db.data[-1].id +
-            1 if self.user_checklist_db.data else 1,
-            user_email=user_email,
-            checklist_id=checklist_id,
-            option_id=option_id,
-            checked=checked
+        # Create a mapping of option_id to checked status
+        response_map = {r.option_id: r.checked for r in user_responses}
+
+        # Build the response structure
+        return UserChecklistResponse(
+            id=checklist.id,
+            title=checklist.title,
+            options=[
+                ChecklistOptionResponse(
+                    id=option.id,
+                    option_text=option.option_text,
+                    checked=response_map.get(option.id, False)
+                )
+                for option in checklist.options
+            ]
         )
-        self.user_checklist_db.add_item(response)
 
-    def create_default_responses(self, user_email: str, checklist_id: int) -> List[UserChecklistResponse]:
-        checklists = checklist_crud.get_all_checklists()
-        checklist = next(
-            (cl for cl in checklists if cl.id == checklist_id), None)
-        if checklist:
-            for option in checklist.items:
-                self.create_user_checklist_response(
-                    user_email, checklist_id, option.id, False)
-            return self.get_checklist(user_email, checklist_id)
-        return []
+    def get_all_user_checklists(
+        self,
+        db: Session,
+        user_email: str
+    ) -> List[UserChecklistResponse]:
+        # Get all checklists with their options
+        checklists = db.query(Checklist).options(
+            joinedload(Checklist.options)
+        ).all()
+
+        # Get all user responses
+        user_responses = db.query(UserChecklist).filter(
+            UserChecklist.user_email == user_email
+        ).all()
+
+        # Create a mapping of checklist_id to option responses
+        response_map = {
+            (r.checklist_id, r.option_id): r.checked
+            for r in user_responses
+        }
+
+        # Build the response structure
+        return [
+            UserChecklistResponse(
+                id=checklist.id,
+                title=checklist.title,
+                options=[
+                    ChecklistOptionResponse(
+                        id=option.id,
+                        option_text=option.option_text,
+                        checked=response_map.get(
+                            (checklist.id, option.id), False
+                        )
+                    )
+                    for option in checklist.options
+                ]
+            )
+            for checklist in checklists
+        ]
+
+    def update_response(
+        self,
+        db: Session,
+        user_email: str,
+        option_id: int,
+        checked: bool
+    ) -> bool:
+        response = db.query(self.model).filter(
+            self.model.option_id == option_id,
+            self.model.user_email == user_email
+        ).first()
+
+        if response:
+            print("here")
+            response.checked = checked
+        else:
+            option = db.query(ChecklistOption).filter(
+                ChecklistOption.id == option_id
+            ).first()
+
+            if not option:
+                return False  # Option doesn't exist
+
+            response = self.model(
+                user_email=user_email,
+                checklist_id=option.checklist_id,
+                option_id=option_id,
+                checked=checked
+            )
+            db.add(response)
+
+        db.commit()
+        db.refresh(response)
+        return True
 
 
-user_checklist_crud = UserChecklistRepository()
+user_checklist_crud = UserChecklistRepository(model=UserChecklist)

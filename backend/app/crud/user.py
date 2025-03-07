@@ -6,10 +6,10 @@ from security import verify_password
 
 
 class UserRepository(CRUDRepository):
-    def find_all(self, db: Session) -> User:
+    def find_all(self, db: Session) -> List[User]:
         return db.query(User).all()
 
-    def find_by_email(self, db: Session, email: str) -> List[User]:
+    def find_by_email(self, db: Session, email: str) -> User:
         return db.query(User).filter(User.email == email).first()
 
     def authenticate_user(self, db: Session, email: str, password: str) -> User:
