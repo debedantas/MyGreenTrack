@@ -30,7 +30,7 @@ export function LoginForm({ toggle }) {
 
             login({ email, token });
             notify(toast.success, "Login efetuado com sucesso");
-            navigate('/');
+            navigate('/dicas');
         } catch (error) {
             notify(toast.error, "Email ou senha incorretos");
         }
