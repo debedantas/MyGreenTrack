@@ -5,25 +5,27 @@ import { PrivateRoute } from "./components/PrivateRoute"
 import { Login } from './pages/Login'
 import { Dicas } from './pages/dicas';
 import { Register } from './pages/Register';
+import { Habitos } from './pages/Habitos';
 
 export function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          {["/", "/dicas"].map((path) => (
-            <Route
-              key={path}
-              path={path}
-              element={
-                <PrivateRoute>
-                  <Dicas />
-                </PrivateRoute>
-              }
-            />
-          ))}
+          <Route path="/dicas" element={
+            <PrivateRoute>
+              <Dicas />
+            </PrivateRoute>
+          } />
+          <Route path="/habitos" element={
+            <PrivateRoute>
+              <Habitos />
+            </PrivateRoute>
+          } />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from schemas.pagination import PaginatedResponse
 
 
 class ChecklistOptionResponse(BaseModel):

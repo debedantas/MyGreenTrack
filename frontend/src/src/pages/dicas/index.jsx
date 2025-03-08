@@ -1,23 +1,11 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import imagePlaceHolder from "./image 1.png";
-import { useAuth } from "../../context/authProvider";
-import axios from "axios";
 import { Toaster } from "react-hot-toast";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
 
 export function Dicas() {
-  const { user, logout } = useAuth();
-  const [name, setName] = useState('');
-
-  (async () => {
-    const res = await axios.get('http://localhost:8000/user/me', {
-      headers: {
-        Authorization: `Bearer ${user?.token}`,
-      },
-    })
-
-    setName(res.data.full_name)
-  })();
 
   const [page, setPage] = useState(1);
 
@@ -97,19 +85,7 @@ export function Dicas() {
   return (
     <div className={styles.container}>
       <Toaster />
-      <header className={styles.header}>
-        <h1 className={styles.greetings}>Olá, {name}</h1>
-        <nav>
-          <ul className={styles.nav_list}>
-            <li className={styles.active}>Dicas</li>
-            <li>Hábitos</li>
-            <li>Pegada</li>
-            <li className={styles.logout}><button className={styles.logout} onClick={logout}>Sair</button></li>
-          </ul>
-        </nav>
-      </header>
-
-      <h1 className={styles.title}>MyGreenTrack</h1>
+      <Header activePage="Dicas" />
 
       <section className={styles.tips_section}>
         <h2 className={styles.section_title}>Dicas recentes</h2>
@@ -158,9 +134,7 @@ export function Dicas() {
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        MyGreenTrack © 2025
-      </footer>
+      <Footer />
     </div>
   );
 }
