@@ -1,27 +1,16 @@
-from typing import List, Optional
-from schemas.content import Content
-from db.fake_db import FakeDataBase
+from typing import List
+from sqlalchemy.orm import Session
+from model.content import M_Content
+from crud.base_crud import CRUDRepository
 
 
-class ContentRepository:
-    def __init__(self):
-        self.content_db = FakeDataBase(Content)
+class ContentRepository(CRUDRepository):
+    def find_all(self, db: Session) -> List[M_Content]:
+        return db.query(M_Content).all()
 
-    def get_all_content(self) -> List[Content]:
-        return self.content_db.get_all_items()
-
-    def get_content(self, content_id: int) -> Optional[Content]:
-        content = self.content_db.get_item(content_id, "id")
-        if not content:
-            return None
-        return content
-
-    def create_content(self, content: Content) -> Content:
-        self.content_db.add_item(content)
-        return content
-
-    def delete_content(self, content_id: int) -> None:
-        self.content_db.delete_item(content_id, "id")
+    def find_by_id(self, db: Session, id: int) -> M_Content:
+        return db.query(M_Content).filter(M_Content.id == id).first()
 
 
-content_crud = ContentRepository()
+
+content_repository = ContentRepository(model=M_Content)
