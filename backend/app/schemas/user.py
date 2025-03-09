@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import List
+from model.user import UserType
 
 
 class User(BaseModel):
@@ -9,6 +10,7 @@ class User(BaseModel):
 
 class UserInDB(User):
     hashed_password: str
+    type: UserType
 
 
 class UserResponse(UserInDB):

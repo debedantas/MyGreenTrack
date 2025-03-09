@@ -21,16 +21,23 @@ export function LoginForm({ toggle }) {
                 return;
             }
             // Replace with your actual login API URL
-            const response = await axios.post('http://localhost:8000/auth/login', {
+            const loginResponse = await axios.post('http://localhost:8000/auth/login', {
                 email,
                 password,
             });
 
-            const token = response.data.access_token;
+            const token = loginResponse.data.access_token;
 
-            login({ email, token });
+            const response = await axios.get('http://localhost:8000/user/me', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const { full_name, type } = response.data;
+
+            login({ email, token, type, full_name });
             notify(toast.success, "Login efetuado com sucesso");
-            navigate('/');
+            navigate('/dicas');
         } catch (error) {
             notify(toast.error, "Email ou senha incorretos");
         }
