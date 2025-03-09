@@ -11,6 +11,14 @@ class Tip(BaseModel):
     summary: str
     content_id: int
 
+    class Config:
+        orm_mode = True
 
-class Tips(BaseModel):
-    tips: List[Tip]
+
+class TipCreate(BaseModel):
+    title: str
+    author_name: str
+    category: str
+    creation_date: str
+    summary: str
+    content_id: int

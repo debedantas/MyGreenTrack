@@ -1,26 +1,38 @@
 from typing import List, Optional
-from schemas.checklist import Checklist
-from db.fake_db import FakeDataBase
+from crud.base_crud import CRUDRepository
+from sqlalchemy.orm import Session, joinedload
+from model.checklist import Checklist, ChecklistOption
+from schemas.checklist import ChecklistCreate
 
 
-class ChecklistRepository:
-    def __init__(self):
-        self.checklist_db = FakeDataBase(Checklist)
+class ChecklistRepository(CRUDRepository):
+    def get_all_checklists(self, db: Session) -> List[Checklist]:
+        return db.query(Checklist).options(joinedload(Checklist.options)).all()
 
-    def get_all_checklists(self) -> List[Checklist]:
-        return self.checklist_db.get_all_items()
+    def get_checklist(self, db: Session, checklist_id: int) -> Optional[Checklist]:
+        return (
+            db.query(Checklist)
+            .options(joinedload(Checklist.options))
+            .filter(Checklist.id == checklist_id)
+            .first()
+        )
 
-    def get_checklist(self, checklist_id: int) -> Optional[Checklist]:
-        checklist = self.checklist_db.get_item(checklist_id, "id")
-        if not checklist:
-            return None
-        return checklist
+    def create(self, db: Session, checklist_create: ChecklistCreate) -> Checklist:
+        checklist_data = checklist_create.model_dump()
+        options_data = checklist_data.pop("options", [])
 
-    def create_checklist(self, checklist: Checklist) -> None:
-        self.checklist_db.add_item(checklist)
+        db_checklist = Checklist(**checklist_data)
+        db.add(db_checklist)
+        db.commit()
+        db.refresh(db_checklist)
 
-    def delete_checklist(self, checklist_id: int) -> None:
-        self.checklist_db.delete_item(checklist_id, "id")
+        for option in options_data:
+            db_option = ChecklistOption(**option, checklist_id=db_checklist.id)
+            db.add(db_option)
+
+        db.commit()
+        db.refresh(db_checklist)
+        return db_checklist
 
 
-checklist_crud = ChecklistRepository()
+checklist_crud = ChecklistRepository(model=Checklist)

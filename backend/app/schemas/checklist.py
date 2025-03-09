@@ -2,16 +2,27 @@ from pydantic import BaseModel
 from typing import List
 
 
+class ChecklistOptionCreate(BaseModel):
+    option_text: str
+
+
+class ChecklistCreate(BaseModel):
+    title: str
+    options: List[ChecklistOptionCreate]
+
+
 class ChecklistOption(BaseModel):
     id: int
-    text: str
+    option_text: str
+
+    class Config:
+        orm_mode = True
 
 
 class Checklist(BaseModel):
     id: int
     title: str
-    items: List[ChecklistOption]
+    options: List[ChecklistOption]
 
-
-class Checklists(BaseModel):
-    checklists: List[Checklist]
+    class Config:
+        orm_mode = True
