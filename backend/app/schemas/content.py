@@ -8,4 +8,4 @@ class Content(BaseModel):
 
 
 class Contents(BaseModel):
-    tips: List[Content]
+    contents: List[Content]

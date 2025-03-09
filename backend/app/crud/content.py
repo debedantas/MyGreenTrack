@@ -2,6 +2,7 @@ from typing import List, Optional
 from schemas.content import Content
 from db.fake_db import FakeDataBase
 
+
 class ContentRepository:
     def __init__(self):
         self.content_db = FakeDataBase(Content)
@@ -15,8 +16,9 @@ class ContentRepository:
             return None
         return content
 
-    def create_content(self, content: Content) -> None:
+    def create_content(self, content: Content) -> Content:
         self.content_db.add_item(content)
+        return content
 
     def delete_content(self, content_id: int) -> None:
         self.content_db.delete_item(content_id, "id")
