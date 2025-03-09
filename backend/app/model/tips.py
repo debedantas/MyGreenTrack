@@ -1,12 +1,6 @@
-from sqlalchemy import Column, Integer, String, Enum
-import enum
+from sqlalchemy import Column, Integer, String, Date
 
 from db.database import Base
-
-
-class UserType(enum.Enum):
-    user = "user"
-    admin = "admin"
 
 
 class M_Tip(Base):
@@ -16,7 +10,6 @@ class M_Tip(Base):
     title = Column(String(255), index=True)
     author_name = Column(String(255), index=True)
     category = Column(String(255), index=True)
-    creation_date = Column(String(255), index=True)
+    creation_date = Column(Date, index=True)
     summary = Column(String(255))
     content_id = Column(Integer, index=True)
-    type = Column(Enum(UserType), default="admin")

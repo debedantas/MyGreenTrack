@@ -1,0 +1,127 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.mainContent {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.checklistForm {
+    background: #f5f5f5;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.checklistForm>h1 {
+    margin-top: 0;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup>label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.formGroup>button {
+    font-family: inherit;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.itemInputContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.addButton {
+    background: #6a9e58;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submitButton {
+    background: #6a9e58;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.itemsPreview {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.jsonPreview {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.jsonPreview pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tabButton {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.tabButton.active {
+    background: #6a9e58;
+    color: white;
+}
+
+.inputGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}

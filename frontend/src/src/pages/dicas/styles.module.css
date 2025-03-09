@@ -68,6 +68,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
+  height: 400px;
 }
 
 .card_image {
@@ -86,9 +87,22 @@
   color: gray;
 }
 
+.card_summary {
+  font-size: 0.9rem;
+  color: gray;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 2rem;
+  text-overflow: ellipsis;
+}
+
 .card_title {
   font-size: 1.2rem;
   margin: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 2rem;
+  text-overflow: ellipsis;
 }
 
 .tag_container {
@@ -137,7 +151,6 @@
 
 .grid_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   margin: 30px 0;
 }
