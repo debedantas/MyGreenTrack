@@ -26,7 +26,7 @@ export const Pegada = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/history', {
+                const response = await axios.get('http://mygreentrack.onrender.com/history', {
                     headers: {
                         Authorization: `Bearer ${user?.token}`
                     }
@@ -81,7 +81,7 @@ export const Pegada = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8000/history/${id}`, {
+            const response = await axios.delete(`http://mygreentrack.onrender.com/history/${id}`, {
                 headers: {
                     Authorization: `Bearer ${user?.token}`
                 }
@@ -97,7 +97,7 @@ export const Pegada = () => {
 
     const saveResult = async (value) => {
         try {
-            const response = await axios.post('http://localhost:8000/history', {
+            const response = await axios.post('http://mygreentrack.onrender.com/history', {
                 value
             }, {
                 headers: {

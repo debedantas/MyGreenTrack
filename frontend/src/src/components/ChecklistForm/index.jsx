@@ -35,7 +35,7 @@ export const ChecklistForm = ({ onSubmit, styles }) => {
             setIsSubmitting(true);
 
             // Exemplo de chamada API
-            await axios.post('http://localhost:8000/checklist/', payload,
+            await axios.post('http://mygreentrack.onrender.com/checklist/', payload,
                 {
                     headers: {
                         'Content-Type': 'application/json',

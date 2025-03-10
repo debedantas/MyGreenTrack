@@ -27,7 +27,7 @@ export const Checklist = React.memo(({ id, title, options, onChange }) => {
     const item = useMemo(() => classes[Math.floor(Math.random() * classes.length)], []);
 
     const handleCheckboxChange = useCallback(async (id, checked) => {
-        const response = await axios.put(`http://localhost:8000/user_checklist/${id}?checked=${checked}`,
+        const response = await axios.put(`http://mygreentrack.onrender.com/user_checklist/${id}?checked=${checked}`,
             {},
             {
                 headers: {
@@ -48,7 +48,7 @@ export const Checklist = React.memo(({ id, title, options, onChange }) => {
     }, []);
 
     const handleDelete = useCallback(async (id) => {
-        const response = await axios.delete(`http://localhost:8000/checklist/${id}`, {
+        const response = await axios.delete(`http://mygreentrack.onrender.com/checklist/${id}`, {
             headers: {
                 Authorization: `Bearer ${user?.token}`
             }

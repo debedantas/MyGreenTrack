@@ -27,7 +27,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
         try {
             setIsSubmitting(true);
 
-            const contentResponse = await axios.post('http://localhost:8000/content/', { html: content.trim() },
+            const contentResponse = await axios.post('http://mygreentrack.onrender.com/content/', { html: content.trim() },
                 {
                     headers: {
                         'Authorization': 'Bearer ' + user?.token
@@ -46,7 +46,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
             };
             console.log(payload)
 
-            await axios.post('http://localhost:8000/tip/create/', payload,
+            await axios.post('http://mygreentrack.onrender.com/tip/create/', payload,
                 {
                     headers: {
                         'Authorization': 'Bearer ' + user?.token

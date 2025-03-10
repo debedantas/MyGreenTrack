@@ -22,7 +22,7 @@ export const Habitos = () => {
     useEffect(() => {
         const fetchChecklists = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/user_checklist', {
+                const response = await axios.get('http://mygreentrack.onrender.com/user_checklist', {
                     params: {
                         page: currentPage
                     },
@@ -77,7 +77,7 @@ export const Habitos = () => {
     useEffect(() => {
         const fetchAllChecklists = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/user_checklist/all', {
+                const response = await axios.get('http://mygreentrack.onrender.com/user_checklist/all', {
                     headers: {
                         Authorization: `Bearer ${user?.token}`
                     }
@@ -140,7 +140,7 @@ export const Habitos = () => {
     const handleItemChange = () => {
         const fetchAllChecklists = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/user_checklist/all', {
+                const response = await axios.get('http://mygreentrack.onrender.com/user_checklist/all', {
                     headers: {
                         Authorization: `Bearer ${user?.token}`
                     }

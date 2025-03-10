@@ -19,7 +19,7 @@ export function RegisterForm() {
                 return;
             }
             // Replace with your actual login API URL
-            const response = await axios.post('http://localhost:8000/auth/register', {
+            const response = await axios.post('http://mygreentrack.onrender.com/auth/register', {
                 full_name: fullName,
                 email,
                 password,

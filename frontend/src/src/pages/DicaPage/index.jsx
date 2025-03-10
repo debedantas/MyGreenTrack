@@ -28,7 +28,7 @@ export const DicaPage = () => {
 
     useEffect(() => {
         const fetchRecentTips = async () => {
-            const response = await axios.get('http://localhost:8000/tip', {
+            const response = await axios.get('http://mygreentrack.onrender.com/tip', {
                 params: {
                     page: 0
                 },
@@ -42,9 +42,9 @@ export const DicaPage = () => {
     useEffect(() => {
         const fetchContent = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/tip/tip_id/${id}`);
+                const response = await axios.get(`http://mygreentrack.onrender.com/tip/tip_id/${id}`);
                 setTip(response.data);
-                const contentResponse = await axios.get(`http://localhost:8000/content/${response.data.content_id}`);
+                const contentResponse = await axios.get(`http://mygreentrack.onrender.com/content/${response.data.content_id}`);
                 setContent(contentResponse.data.html);
 
             } catch (error) {
@@ -56,7 +56,7 @@ export const DicaPage = () => {
     }, [id]);
 
     const handleDelete = useCallback(async (id) => {
-        const response = await axios.delete(`http://localhost:8000/tip/${id}`, {
+        const response = await axios.delete(`http://mygreentrack.onrender.com/tip/${id}`, {
             headers: {
                 Authorization: `Bearer ${user?.token}`
             }

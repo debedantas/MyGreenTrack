@@ -18,7 +18,7 @@ export function Dicas() {
 
   useEffect(() => {
     const fetchRecentTips = async () => {
-      const response = await axios.get('http://localhost:8000/tip', {
+      const response = await axios.get('http://mygreentrack.onrender.com/tip', {
         params: {
           page: 0
         },
@@ -31,7 +31,7 @@ export function Dicas() {
   useEffect(() => {
     const fetchAllTips = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/tip', {
+        const response = await axios.get('http://mygreentrack.onrender.com/tip', {
           params: {
             page: currentPage
           },

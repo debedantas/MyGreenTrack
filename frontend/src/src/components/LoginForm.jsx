@@ -21,14 +21,14 @@ export function LoginForm({ toggle }) {
                 return;
             }
             // Replace with your actual login API URL
-            const loginResponse = await axios.post('http://localhost:8000/auth/login', {
+            const loginResponse = await axios.post('http://mygreentrack.onrender.com/auth/login', {
                 email,
                 password,
             });
 
             const token = loginResponse.data.access_token;
 
-            const response = await axios.get('http://localhost:8000/user/me', {
+            const response = await axios.get('http://mygreentrack.onrender.com/user/me', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
