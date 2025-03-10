@@ -39,6 +39,7 @@ class UserChecklistRepository(CRUDRepository):
         return UserChecklistResponse(
             id=checklist.id,
             title=checklist.title,
+            category=checklist.category,
             options=[
                 ChecklistOptionResponse(
                     id=option.id,
@@ -50,6 +51,42 @@ class UserChecklistRepository(CRUDRepository):
         )
 
     def get_all_user_checklists(
+        self,
+        db: Session,
+        user_email: str,
+    ):
+        checklists = db.query(Checklist).all()
+
+        # Get user responses for these checklists
+        checklist_ids = [c.id for c in checklists]
+        user_responses = db.query(UserChecklist).filter(
+            UserChecklist.user_email == user_email,
+            UserChecklist.checklist_id.in_(checklist_ids)
+        ).all()
+
+        # Map responses to options
+        response_map = {(r.checklist_id, r.option_id): r.checked for r in user_responses}
+
+        # Build items
+        items = [
+            UserChecklistResponse(
+                id=checklist.id,
+                title=checklist.title,
+                category=checklist.category,
+                options=[
+                    ChecklistOptionResponse(
+                        id=option.id,
+                        option_text=option.option_text,
+                        checked=response_map.get(
+                            (checklist.id, option.id), False))
+                    for option in checklist.options
+                ]
+            )
+            for checklist in checklists
+        ]
+        return items
+
+    def get_all_user_checklists_paginated(
         self,
         db: Session,
         user_email: str,
@@ -81,6 +118,7 @@ class UserChecklistRepository(CRUDRepository):
             UserChecklistResponse(
                 id=checklist.id,
                 title=checklist.title,
+                category=checklist.category,
                 options=[
                     ChecklistOptionResponse(
                         id=option.id,

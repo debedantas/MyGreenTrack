@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Dica } from "../../components/Dica";
 
 export function Dicas() {
   const [recentTips, setRecentTips] = useState([]);
@@ -81,21 +81,7 @@ export function Dicas() {
         <h2 className={styles.section_title}>Dicas recentes</h2>
         <div className={styles.grid_container}>
           {recentTips.map((dica) => (
-            <Link to={`/dicas/${dica.content_id}`} key={dica.id} style={{ color: 'inherit', textDecoration: 'inherit' }}>
-              <div key={dica.id} className={styles.card}>
-                <img src={dica.image ?? imagePlaceHolder} alt={dica.title} className={styles.card_image} />
-                <div className={styles.card_content}>
-                  <p className={styles.card_meta}>{dica.author_name} • {dica.creation_date}</p>
-                  <h3 className={styles.card_title}>{dica.title}</h3>
-                  <p className={styles.card_summary}>{dica.summary}</p>
-                  <div className={styles.tag_container}>
-                    {/* {dica.tags.map((tag, index) => ( */}
-                    <span className={styles.tag}>{dica.category}</span>
-                    {/* ))} */}
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <Dica key={dica.id} dica={dica} />
           ))}
         </div>
       </section>
@@ -104,21 +90,7 @@ export function Dicas() {
         <h2 className={styles.section_title}>Todas as dicas</h2>
         <div className={styles.grid_container}>
           {allTips.items.map((dica) => (
-            <Link to={`/dicas/${dica.content_id}`} key={dica.id} style={{ color: 'inherit', textDecoration: 'inherit' }}>
-              <div key={dica.id} className={styles.card}>
-                <img src={dica.image ?? imagePlaceHolder} alt={dica.title} className={styles.card_image} />
-                <div className={styles.card_content}>
-                  <p className={styles.card_meta}>{dica.author_name} • {dica.creation_date}</p>
-                  <h3 className={styles.card_title}>{dica.title}</h3>
-                  <p className={styles.card_summary}>{dica.summary}</p>
-                  <div className={styles.tag_container}>
-                    {/* {dica.tags.map((tag, index) => ( */}
-                    <span className={styles.tag}>{dica.category}</span>
-                    {/* ))} */}
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <Dica key={dica.id} dica={dica} />
           ))}
         </div>
         <div className={styles.pagination}>

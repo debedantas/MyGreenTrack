@@ -6,7 +6,8 @@ from routers import (
     tips,
     content,
     checklist,
-    user_checklist
+    user_checklist,
+    history
 )
 from db.database import engine, Base
 
@@ -32,6 +33,7 @@ app.include_router(tips.router, prefix="/tip")
 app.include_router(content.router, prefix="/content")
 app.include_router(checklist.router, prefix="/checklist")
 app.include_router(user_checklist.router, prefix="/user_checklist")
+app.include_router(history.router, prefix="/history")
 
 # teste para ver se a API está rodando
 
@@ -39,5 +41,3 @@ app.include_router(user_checklist.router, prefix="/user_checklist")
 @app.get("/")
 def health():
     return {"message": "Hello world"}
-
-

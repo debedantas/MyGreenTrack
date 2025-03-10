@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pydantic
+pydantic[email]
+pyjwt
+passlib[bcrypt]
+sqlalchemy
+sqlalchemy_utils
+pymysql
+pytest
+pytest-mock
+cryptography

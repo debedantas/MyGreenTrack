@@ -7,5 +7,9 @@ class Content(BaseModel):
     html: str
 
 
+class ContentCreate(BaseModel):
+    html: str
+
+
 class Contents(BaseModel):
     contents: List[Content]

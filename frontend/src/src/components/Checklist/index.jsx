@@ -18,7 +18,7 @@ const Checkbox = React.memo(({ option, onChange }) => {
     );
 });
 
-export const Checklist = React.memo(({ title, options }) => {
+export const Checklist = React.memo(({ id, title, options, onChange }) => {
     const { user } = useAuth();
 
     const [checkboxes, setCheckboxes] = useState(options);
@@ -37,6 +37,7 @@ export const Checklist = React.memo(({ title, options }) => {
         )
 
         if (response.status === 204) {
+            onChange();
             setCheckboxes(prevCheckboxes =>
                 prevCheckboxes.map(option =>
                     option.id === id ? { ...option, checked: !option.checked } : option
@@ -46,8 +47,31 @@ export const Checklist = React.memo(({ title, options }) => {
 
     }, []);
 
+    const handleDelete = useCallback(async (id) => {
+        const response = await axios.delete(`http://localhost:8000/checklist/${id}`, {
+            headers: {
+                Authorization: `Bearer ${user?.token}`
+            }
+        });
+
+        if (response.status === 204) {
+            // refreshPage
+            const navigate = window.location.reload();
+            navigate();
+        }
+    }, []);
+
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${styles.relative}`}>
+            {user?.type === 'admin' && (
+                <span
+                    className={styles.deleteButton}
+                    onClick={() => handleDelete(id)}
+                    title="Excluir hábito"
+                >
+                    🗑️  {/* Or use an SVG icon */}
+                </span>
+            )}
             <h3 className={item}>{title}</h3>
             <h4>Hábitos</h4>
             <ul>

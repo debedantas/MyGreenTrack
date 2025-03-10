@@ -17,9 +17,18 @@ async def get_user_checklists(
     page: int = 1,
     per_page: int = 3  # Optional: Let clients specify items per page
 ) -> PaginatedResponse[UserChecklistResponse]:
-    return user_checklist_crud.get_all_user_checklists(
+    return user_checklist_crud.get_all_user_checklists_paginated(
         db, current_user.email, page, per_page
     )
+
+
+@router.get("/all")
+async def get_all_checklists(
+    current_user: UserInDB = Depends(get_current_user),
+    db=Depends(get_db)
+):
+    return user_checklist_crud.get_all_user_checklists(
+        db, current_user.email)
 
 
 @router.get("/{checklist_id}", response_model=List[UserChecklistResponse])

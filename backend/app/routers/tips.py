@@ -33,3 +33,18 @@ async def create_tip(
 ) -> Tip:
     tip = tip_repository.create(db, tip_create)
     return tip
+
+
+@router.delete("/{tip_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_tip(
+    tip_id: int,
+    db: Session = Depends(get_db),
+    super_user=Depends(get_current_active_super_user)
+):
+    tip = tip_repository.find_by_id(db, tip_id)
+    if not tip:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Tip with ID {tip_id} not found"
+        )
+    tip_repository.delete(db, tip)

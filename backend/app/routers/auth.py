@@ -42,7 +42,7 @@ async def create_user(user_create: UserRegister, db: Session = Depends(get_db)) 
 async def create_admin(
     user_create: UserRegister,
     db: Session = Depends(get_db),
-    super_user=Depends(get_current_active_super_user)
+    # super_user=Depends(get_current_active_super_user)
 ) -> UserInDB:
     user = user_repository.find_by_email(db, user_create.email)
     if user is not None:

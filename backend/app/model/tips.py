@@ -12,4 +12,5 @@ class M_Tip(Base):
     category = Column(String(255), index=True)
     creation_date = Column(Date, index=True)
     summary = Column(String(255))
+    image_link = Column(String(255), index=True, default="")
     content_id = Column(Integer, index=True)

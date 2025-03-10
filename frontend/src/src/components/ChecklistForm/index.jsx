@@ -5,6 +5,7 @@ import { useAuth } from '../../context/authProvider';
 export const ChecklistForm = ({ onSubmit, styles }) => {
     const { user } = useAuth();
     const [title, setTitle] = useState('');
+    const [category, setCategory] = useState('Economia');
     const [itemInput, setItemInput] = useState('');
     const [items, setItems] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,6 +27,7 @@ export const ChecklistForm = ({ onSubmit, styles }) => {
 
         const payload = {
             title: title.trim(),
+            category: category.trim(),
             options: items.map(item => ({ option_text: item }))
         };
 
@@ -44,6 +46,7 @@ export const ChecklistForm = ({ onSubmit, styles }) => {
 
             onSubmit(true, "Checklist criada"); // Passa os dados para o componente pai
             setTitle('');
+            setCategory('Economia');
             setItems([]);
         } catch (err) {
             console.log(err)
@@ -66,6 +69,20 @@ export const ChecklistForm = ({ onSubmit, styles }) => {
                     required
                     className={styles.input}
                 />
+            </div>
+
+            <div className={styles.formGroup}>
+                <label>Categoria:</label>
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className={styles.input}
+                >
+                    <option value="Economia">Economia</option>
+                    <option value="Sustentabilidade">Sustentabilidade</option>
+                    <option value="Mobilidade">Mobilidade</option>
+                    <option value="Consumo">Consumo</option>
+                </select>
             </div>
 
             <div className={styles.formGroup}>

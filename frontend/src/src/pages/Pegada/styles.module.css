@@ -4,3 +4,178 @@
     padding: 20px;
     font-family: 'Segoe UI', sans-serif;
 }
+
+.mainContent {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form {
+    background: #f5f5f5;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form>div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input {
+    /* width: 100%; */
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form input::placeholder {
+    color: #aaa;
+}
+
+.form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+.inputGroup label {
+    margin-bottom: 0.5rem;
+}
+
+.gridGroup {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 0.5rem;
+}
+
+.span {
+    grid-column: span 2;
+}
+
+.side {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.side label {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.side input {
+    min-width: 0;
+    flex: 1;
+}
+
+.flexGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form>div>div {
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #eee;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.form * {
+    font-family: inherit;
+}
+
+.form button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #6a9e58;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.result {
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ADC17855;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.result p {
+    font-size: 1.2rem;
+}
+
+.result h3 {
+    font-size: 2rem;
+}
+
+.result h4 {
+    padding: 0;
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.highlight {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+}
+
+.tabButton {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.tabButton.active {
+    background: #6a9e58;
+    color: white;
+}
+
+.history {
+    position: relative;
+    /* Needed for absolute positioning */
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.deleteButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.7;
+    color: transparent;
+    text-shadow: 0 0 0 black
+}
+
+.deleteButton:hover {
+    opacity: 1;
+    text-shadow: 0 0 0 red
+}

@@ -42,6 +42,11 @@
     cursor: pointer;
 }
 
+.nav_list li:hover {
+    color: #99c178;
+}
+
+
 .nav_list {
     display: flex;
     gap: 30px;
@@ -52,7 +57,7 @@
     color: #6a9e58;
 }
 
-.logout {
+.logout:hover {
     color: red;
 }
 

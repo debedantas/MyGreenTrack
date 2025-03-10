@@ -12,6 +12,7 @@ class ChecklistOptionResponse(BaseModel):
 class UserChecklistResponse(BaseModel):
     id: int
     title: str
+    category: str
     options: List[ChecklistOptionResponse]
 
     class Config:

@@ -65,6 +65,96 @@ export const Habitos = () => {
         return pages;
     };
 
+    const [allChecklists, setAllChecklists] = useState([]);
+    const [metrics, setMetrics] = useState({
+        totalHabits: 0,
+        completedHabits: 0,
+        completedChecklists: 0,
+        completedByCategory: {}
+    });
+
+    // Fetch ALL checklists (remove pagination)
+    useEffect(() => {
+        const fetchAllChecklists = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/user_checklist/all', {
+                    headers: {
+                        Authorization: `Bearer ${user?.token}`
+                    }
+                });
+                setAllChecklists(response.data);
+                calculateMetrics(response.data);
+            } catch (error) {
+                console.error('Error fetching checklists:', error);
+            }
+        };
+
+        if (user) fetchAllChecklists();
+    }, [user]);
+
+    // Calculate metrics from all checklists
+    const calculateMetrics = (checklists) => {
+        let completedHabits = 0;
+        let completedChecklists = 0;
+        const categoryCounts = {};
+
+        checklists.forEach(checklist => {
+            // Count completed habits
+            const completedInChecklist = checklist.options.filter(option => option.checked).length;
+            completedHabits += completedInChecklist;
+
+            // Check if checklist is fully completed
+            const isChecklistComplete = completedInChecklist === checklist.options.length;
+            if (isChecklistComplete) {
+                completedChecklists++;
+                // Count by category
+                const category = checklist.category.toLowerCase();
+                categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+            }
+        });
+
+        console.log(categoryCounts)
+        setMetrics({
+            totalHabits: checklists.reduce((acc, curr) => acc + curr.options.length, 0),
+            completedHabits,
+            completedChecklists,
+            completedByCategory: categoryCounts
+        });
+    };
+
+    // Get icon based on progress
+    const getIcon = (current, target) => {
+        if (current >= target) return checkmark;
+        if (current >= Math.floor(target / 2)) return hourglass;
+        return sleeping;
+    };
+
+    // Render meta items
+    const renderMetaItem = (label, current, target) => (
+        <li>
+            <img src={getIcon(current, target)} alt="" />
+            <span>{label} ({current}/{target})</span>
+        </li>
+    );
+
+    const handleItemChange = () => {
+        const fetchAllChecklists = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/user_checklist/all', {
+                    headers: {
+                        Authorization: `Bearer ${user?.token}`
+                    }
+                });
+                setAllChecklists(response.data);
+                calculateMetrics(response.data);
+            } catch (error) {
+                console.error('Error fetching checklists:', error);
+            }
+        };
+
+        if (user) fetchAllChecklists();
+    }
+
     return (
         <div className={styles.container}>
             <Header activePage="Habitos" />
@@ -72,58 +162,22 @@ export const Habitos = () => {
                 <h2>Metas</h2>
                 <div className={styles.metas_container}>
                     <ul>
-                        <li>
-                            <img src={checkmark} alt="" />
-                            <span>Concluir 1 hábito</span>
-                        </li>
-                        <li>
-                            <img src={hourglass} alt="" />
-                            <span>Concluir 5 hábitos</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Concluir 10 hábitos</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Concluir 30 hábitos</span>
-                        </li>
+                        {renderMetaItem('Concluir 1 hábito', metrics.completedHabits, 1)}
+                        {renderMetaItem('Concluir 3 hábitos', metrics.completedHabits, 3)}
+                        {renderMetaItem('Concluir 7 hábitos', metrics.completedHabits, 7)}
+                        {renderMetaItem('Concluir 15 hábitos', metrics.completedHabits, 15)}
                     </ul>
                     <ul>
-                        <li>
-                            <img src={checkmark} alt="" />
-                            <span>Zerar 1 lista</span>
-                        </li>
-                        <li>
-                            <img src={hourglass} alt="" />
-                            <span>Zerar 3 listas</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Zerar 5 listas</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Zerar 10 listas</span>
-                        </li>
+                        {renderMetaItem('Zerar 1 lista', metrics.completedChecklists, 1)}
+                        {renderMetaItem('Zerar 3 listas', metrics.completedChecklists, 3)}
+                        {renderMetaItem('Zerar 7 listas', metrics.completedChecklists, 7)}
+                        {renderMetaItem('Zerar 15 listas', metrics.completedChecklists, 15)}
                     </ul>
                     <ul>
-                        <li>
-                            <img src={checkmark} alt="" />
-                            <span>Zerar 3 listas de reciclagem</span>
-                        </li>
-                        <li>
-                            <img src={hourglass} alt="" />
-                            <span>Zerar 3 listas de economia</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Zerar 3 listas de sustentabilidade</span>
-                        </li>
-                        <li>
-                            <img src={sleeping} alt="" />
-                            <span>Zerar 3 listas de eletricidade</span>
-                        </li>
+                        {renderMetaItem('Zerar 3 listas de economia', metrics.completedByCategory.economia || 0, 3)}
+                        {renderMetaItem('Zerar 3 listas de sustentabilidade', metrics.completedByCategory.sustentabilidade || 0, 3)}
+                        {renderMetaItem('Zerar 3 listas de mobilidade', metrics.completedByCategory.mobilidade || 0, 3)}
+                        {renderMetaItem('Zerar 3 listas de consumo', metrics.completedByCategory.consumo || 0, 3)}
                     </ul>
                 </div>
             </section>
@@ -133,8 +187,10 @@ export const Habitos = () => {
                     {checklistsData.items.map((checklist) => (
                         <Checklist
                             key={checklist.id}
+                            id={checklist.id}
                             title={checklist.title}
                             options={checklist.options}
+                            onChange={handleItemChange}
                         />
                     ))}
                 </div>

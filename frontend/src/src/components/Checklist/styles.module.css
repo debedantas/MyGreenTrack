@@ -6,6 +6,7 @@
     align-items: center;
     width: 373px;
     height: 595px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .container h3 {
@@ -180,4 +181,26 @@ progress::-webkit-progress-value {
 
 .yellow {
     background-color: #DDA15E;
+}
+
+.relative {
+    position: relative;
+}
+
+.deleteButton {
+    border-radius: 100%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    color: transparent;
+    text-shadow: 0 0 0 black
+}
+
+.deleteButton:hover {
+    opacity: 1;
+    text-shadow: 0 0 0 red
 }

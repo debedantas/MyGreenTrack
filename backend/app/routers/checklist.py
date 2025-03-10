@@ -49,4 +49,3 @@ async def delete_checklist(
             detail=f"Checklist with ID {checklist_id} not found"
         )
     checklist_crud.delete(db, checklist)
-    return None

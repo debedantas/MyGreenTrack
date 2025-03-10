@@ -8,6 +8,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
     const [author, setAuthor] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [summary, setSummary] = useState('');
+    const [imageLink, setImageLink] = useState('');
     const [category, setCategory] = useState('technology');
     const [content, setContent] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +27,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
         try {
             setIsSubmitting(true);
 
-            const contentResponse = await axios.post('http://localhost:8000/content/', { id: 123, html: content.trim() },
+            const contentResponse = await axios.post('http://localhost:8000/content/', { html: content.trim() },
                 {
                     headers: {
                         'Authorization': 'Bearer ' + user?.token
@@ -39,8 +40,9 @@ export const DicaForm = ({ onSubmit, styles }) => {
                 author_name: author.trim(),
                 creation_date: date,
                 summary: summary.trim(),
+                image_link: imageLink.trim(),
                 category,
-                content_id: contentResponse.data.content_id
+                content_id: contentResponse.data.id
             };
             console.log(payload)
 
@@ -59,6 +61,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
             setAuthor('');
             setDate(new Date().toISOString().split('T')[0]);
             setSummary('');
+            setImageLink('');
             setCategory('technology');
             setContent('');
         } catch (err) {
@@ -117,16 +120,33 @@ export const DicaForm = ({ onSubmit, styles }) => {
             </div>
 
             <div className={styles.formGroup}>
+                <label>Link da imagem:</label>
+                <input
+                    type="text"
+                    value={imageLink}
+                    onChange={(e) => setImageLink(e.target.value)}
+                    className={styles.input}
+                    required
+                />
+            </div>
+
+            <div className={styles.formGroup}>
                 <label>Categoria:</label>
                 <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className={styles.input}
                 >
-                    <option value="technology">Tecnologia</option>
-                    <option value="lifestyle">Estilo de Vida</option>
-                    <option value="education">Educação</option>
-                    <option value="business">Negócios</option>
+                    <option value="Energia">Energia</option>
+                    <option value="Água">Água</option>
+                    <option value="Sustentabilidade">Sustentabilidade</option>
+                    <option value="De casa">De casa</option>
+                    <option value="Plantação">Plantação</option>
+                    <option value="Limpeza">Limpeza</option>
+                    <option value="Economia">Economia</option>
+                    <option value="Reflorestamento">Reflorestamento</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Consumismo">Consumismo</option>
                 </select>
             </div>
 

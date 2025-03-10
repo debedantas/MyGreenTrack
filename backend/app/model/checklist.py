@@ -19,6 +19,7 @@ class Checklist(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(255), index=True)
+    category = Column(String(255), index=True)
     options = relationship(
         "ChecklistOption", back_populates="checklist", cascade="all, delete-orphan")
     user_responses = relationship("UserChecklist", back_populates="checklist")

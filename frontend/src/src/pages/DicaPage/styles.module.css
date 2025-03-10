@@ -1,0 +1,89 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 32% 66%;
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+
+    /* gap: 2rem; */
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.recentTipsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: inherit;
+}
+
+.recentTipsSection>* {
+    margin: 0;
+}
+
+.recentTipsSection>h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.recentTips {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tipContent__date {
+    display: inline-block;
+    color: #6941C6;
+    font-size: 0.9rem;
+    /* text-transform: capitalize; */
+}
+
+.tipContent__date::first-letter {
+    text-transform: uppercase;
+}
+
+.tipContent__title {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.tipContent img {
+    width: 100%;
+    aspect-ratio: 16/9;
+
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+
+
+.relative {
+    position: relative;
+}
+
+.deleteButton {
+    border-radius: 100%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    color: transparent;
+    text-shadow: 0 0 0 black
+}
+
+.deleteButton:hover {
+    opacity: 1;
+    text-shadow: 0 0 0 red
+}

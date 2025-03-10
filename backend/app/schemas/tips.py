@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from datetime import date
 
 
 class Tip(BaseModel):
@@ -7,8 +8,9 @@ class Tip(BaseModel):
     title: str
     author_name: str
     category: str
-    creation_date: str
+    creation_date: date
     summary: str
+    image_link: str
     content_id: int
 
     class Config:
@@ -19,6 +21,7 @@ class TipCreate(BaseModel):
     title: str
     author_name: str
     category: str
-    creation_date: str
+    creation_date: date
     summary: str
+    image_link: str
     content_id: int

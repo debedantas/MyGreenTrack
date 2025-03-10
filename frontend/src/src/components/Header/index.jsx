@@ -19,7 +19,7 @@ export const Header = ({ activePage = "Dicas" }) => {
                         {user.type === 'admin' && <li className={activePage === 'Admin' ? styles.active : ''} onClick={() => navigateTo("/admin")}>Admin</li>}
                         <li className={activePage === 'Dicas' ? styles.active : ''} onClick={() => navigateTo("/dicas")}>Dicas</li>
                         <li className={activePage === 'Habitos' ? styles.active : ''} onClick={() => navigateTo("/habitos")}>Hábitos</li>
-                        <li className={activePage === 'Pegada' ? styles.active : ''} onClick={() => navigateTo("/pegada")}>Pegada</li>
+                        <li className={activePage === 'Pegada' ? styles.active : ''} onClick={() => navigateTo("/pegada")}>Calculadora</li>
                         <li className={styles.logout}><button className={styles.logout} onClick={logout}>Sair</button></li>
                     </ul>
                 </nav>

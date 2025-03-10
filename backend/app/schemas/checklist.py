@@ -8,6 +8,7 @@ class ChecklistOptionCreate(BaseModel):
 
 class ChecklistCreate(BaseModel):
     title: str
+    category: str
     options: List[ChecklistOptionCreate]
 
 
@@ -22,6 +23,7 @@ class ChecklistOption(BaseModel):
 class Checklist(BaseModel):
     id: int
     title: str
+    category: str
     options: List[ChecklistOption]
 
     class Config:
