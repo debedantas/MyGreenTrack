@@ -9,7 +9,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [summary, setSummary] = useState('');
     const [imageLink, setImageLink] = useState('');
-    const [category, setCategory] = useState('technology');
+    const [category, setCategory] = useState('Energia');
     const [content, setContent] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
@@ -62,7 +62,7 @@ export const DicaForm = ({ onSubmit, styles }) => {
             setDate(new Date().toISOString().split('T')[0]);
             setSummary('');
             setImageLink('');
-            setCategory('technology');
+            setCategory('Energia');
             setContent('');
         } catch (err) {
             onSubmit(false, "Erro ao publicar dica");
