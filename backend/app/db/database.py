@@ -1,16 +1,19 @@
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 # Configuração do banco de dados
-DATABASE_USER = "root"
-DATABASE_PASSWORD = "35234111Rls!"
-DATABASE_HOST = "localhost"
-DATABASE_NAME = "testeteste3"
+DATABASE_USER = os.getenv('DATABASE_USER')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
+DATABASE_HOST = os.getenv('DATABASE_HOST')
+DATABASE_NAME = os.getenv('DATABASE_NAME')
 
 # Criando a URL de conexão
-DATABASE_URL = f"mysql+pymysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}"
+DATABASE_URL = f"postgresql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}"
 
 # Criando um engine do SQLAlchemy
 engine = create_engine(DATABASE_URL)

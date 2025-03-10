@@ -10,3 +10,5 @@ pymysql
 pytest
 pytest-mock
 cryptography
+dotenv
+psycopg2
